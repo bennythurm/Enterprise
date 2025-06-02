@@ -16,7 +16,24 @@
                 <li id="header_button"><a href="index.html">Home</a></li>
                 <li id="header_button"><a href="#">About</a></li>
                 <li id="header_button"><a href="#">Contact</a></li>
-                <li class="header_button"><a href="#">Accesibility</a></li>
+                <li class="dropdown">
+                    <a href="#">Accessibility ▼</a>
+                    <div class="dropdown-content">
+                        <label for="themeSelector">Color Mode:</label>
+                        <select id="themeSelector">
+                            <option value="default">Default</option>
+                            <option value="deuteranopia">Deuteranopia</option>
+                            <option value="protanopia">Protanopia</option>
+                            <option value="tritanopia">Tritanopia</option>
+                        </select>
+                        <label for="fontSelector">Font Size:</label>
+                        <select id="fontSelector">
+                            <option value="font-small">Small</option>
+                            <option value="font-medium" selected>Medium</option>
+                            <option value="font-large">Large</option>
+                        </select>
+                    </div>
+                </li>
                 <li class="nav-outline"><a href="booking.html">Booking</a></li>
             </ul>
         </nav>
@@ -98,11 +115,39 @@
     </div>
   </div>
 
-    <a href="booking.html" class="book-button" style="display:inline-block; margin: 30px auto 0;"><b>Book Now</b></a>
+  <a href="booking.html" class="book-button" style="display:inline-block; margin: 30px auto 0;"><b>Book Now</b></a>
+
+  
 </main>
 
     <footer>
         <p>© 2024 My Website</p>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load saved theme and font size from localStorage
+            const savedTheme = localStorage.getItem('theme') || 'default';
+            const savedFont = localStorage.getItem('font') || 'font-medium';
+
+            document.body.classList.add(savedTheme, savedFont);
+            document.getElementById('themeSelector').value = savedTheme;
+            document.getElementById('fontSelector').value = savedFont;
+
+            // COLOR MODE
+            document.getElementById('themeSelector').addEventListener('change', function() {
+                document.body.classList.remove('default', 'deuteranopia', 'protanopia', 'tritanopia');
+                document.body.classList.add(this.value);
+                localStorage.setItem('theme', this.value);
+            });
+
+            // FONT SIZE
+            document.getElementById('fontSelector').addEventListener('change', function() {
+                document.body.classList.remove('font-small', 'font-medium', 'font-large');
+                document.body.classList.add(this.value);
+                localStorage.setItem('font', this.value);
+            });
+        });
+    </script>
 </body>
 </html>
