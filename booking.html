@@ -1,0 +1,214 @@
+
+</head>
+<body>
+
+    <header>
+        <img src="logo.jpeg" width="300" height="200" alt ="logo" class = "header-logo">
+        <h1>Italian Car Wash</h1>
+        <nav>
+            <ul>
+                <li id="header_button"><a href="index.html">Home</a></li>
+                <li id="header_button"><a href="#">About</a></li>
+                <li id="header_button"><a href="#">Contact</a></li>
+                <li class="header_button"><a href="#">Accesibility</a></li>
+                <li class="nav-outline"><a href="booking.html">Booking</a></li>
+            </ul>
+        </nav>
+    </header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Car Wash Services</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+ <div class="vehicle_option"> 
+    <b>Select Your Vehicle: </b>
+</div>
+  <!-- Vehicle Type Selector -->
+  <div class="vehicle-selector">
+    <button class="vehicle active"><br>SEDAN</button>
+    <button class="vehicle"><br>SW/SUV/4WD</button>
+    <button class="vehicle"><br>X-LARGE</button>
+    <button class="vehicle"><br>XXL</button>
+  </div>
+
+  <!-- Service Type Toggle -->
+  <div class="service-toggle">
+    <span>Select Service:</span>
+    <div class="toggle-buttons">
+      <button class="toggle active">Wash Service</button>
+    </div>
+  </div>
+
+  <!-- Pricing Cards -->
+  <div class="pricing-section">
+    <span>Select:</span>
+    <div class="cards">
+      <!-- Express Wash -->
+      <div class="card">
+        <div class="price">$25</div>
+        <div class="title">Express Wash</div>
+        <hr />
+        <ul>
+          <li>✔ High-pressure rinse</li>
+          <li>✔ Exterior wash with pH neutral shampoo</li>
+          <li>✔ Apply tyre shine</li>
+          <li>✔ Exterior windows & side mirrors cleaned</li>
+          <li>✔ Mag wheel wash process</li>
+          <li>✘ Vacuum interior floor mats & footwells</li>
+          <li>✘ Vacuum seats & boot</li>
+          <li>✘ Clean door & boot jambs</li>
+          <li>✘ Interior windows & mirrors cleaned</li>
+          <li>✘ Clean dashboard & console</li>
+          <li>✘ Clean door trims</li>
+          <li>✘ Remove tar & bugs</li>
+          <li>✘ Full duco liquid wax polish</li>
+        </ul>
+      </div>
+
+      <!-- Platinum Wash -->
+      <div class="card">
+        <div class="price">$59</div>
+        <div class="title">Platinum Wash</div>
+        <hr />
+        <ul>
+          <li>✔ High-pressure rinse</li>
+          <li>✔ Exterior wash with pH neutral shampoo</li>
+          <li>✔ Apply tyre shine</li>
+          <li>✔ Exterior windows & side mirrors cleaned</li>
+          <li>✔ Mag wheel wash process</li>
+          <li>✔ Vacuum interior floor mats & footwells</li>
+          <li>✔ Vacuum seats & boot</li>
+          <li>✔ Clean door & boot jambs</li>
+          <li>✔ Interior windows & mirrors cleaned</li>
+          <li>✔ Clean dashboard & console</li>
+          <li>✘ Clean door trims</li>
+          <li>✘ Remove tar & bugs</li>
+          <li>✘ Full duco liquid wax polish</li>
+        </ul>
+      </div>
+
+      <!-- Star Polish -->
+      <div class="card featured">
+        <div class="price">
+          <span class="old">$105</span><span>$95</span>
+        </div>
+        <div class="save">Save $10</div>
+        <div class="title">Star Polish</div>
+        <hr />
+        <ul>
+          <li>✔ High-pressure rinse</li>
+          <li>✔ Exterior wash with pH neutral shampoo</li>
+          <li>✔ Apply tyre shine</li>
+          <li>✔ Exterior windows & side mirrors cleaned</li>
+          <li>✔ Mag wheel wash process</li>
+          <li>✔ Vacuum interior floor mats & footwells</li>
+          <li>✔ Vacuum seats & boot</li>
+          <li>✔ Clean door & boot jambs</li>
+          <li>✔ Interior windows & mirrors cleaned</li>
+          <li>✔ Clean dashboard & console</li>
+          <li>✔ Clean door trims</li>
+          <li>✔ Remove tar & bugs</li>
+          <li>✔ Full duco liquid wax polish</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <form id="bookingForm" action="save-booking.php" method="POST">
+  <input type="hidden" id="selectedVehicle" name="vehicle">
+  <input type="hidden" id="selectedService" name="service">
+  <input type="hidden" id="selectedPackage" name="package">
+</form>
+
+<script>
+  // Select DOM elements only once
+  const vehicleButtons = document.querySelectorAll('.vehicle');
+  const serviceButtons = document.querySelectorAll('.toggle');
+  const cards = document.querySelectorAll('.card');
+
+  let selectedVehicle = "SEDAN";
+  let selectedService = "Wash Service";
+  let selectedPackage = "Express Wash";
+
+  // Vehicle button selection
+  vehicleButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      vehicleButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedVehicle = btn.innerText.trim();
+    });
+  });
+
+  // Service type toggle
+  serviceButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      serviceButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedService = btn.innerText.trim();
+    });
+  });
+
+  // Card/package selection
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      cards.forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      selectedPackage = card.querySelector('.title').innerText.trim();
+    });
+  });
+
+  // On form submit, inject selected values into hidden inputs
+  document.getElementById("bookingForm").addEventListener("submit", function () {
+    document.getElementById("selectedVehicle").value = selectedVehicle;
+    document.getElementById("selectedService").value = selectedService;
+    document.getElementById("selectedPackage").value = selectedPackage;
+  });
+
+   // SAVING THE OPTION ACROSS PAGES
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load saved theme and font size from localStorage
+            const savedTheme = localStorage.getItem('theme') || 'default';
+            const savedFont = localStorage.getItem('font') || 'font-medium';
+            
+            document.body.classList.add(savedTheme, savedFont);
+            document.getElementById('themeSelector').value = savedTheme;
+            document.getElementById('fontSelector').value = savedFont;
+        });
+
+        // COLOR MODE
+        document.getElementById('themeSelector').addEventListener('change', function() {
+            document.body.classList.remove('default', 'deuteranopia', 'protanopia', 'tritanopia');
+            document.body.classList.add(this.value);
+            localStorage.setItem('theme', this.value); // <-- Save to localStorage
+        });
+    
+        // FONT SIZE
+        document.getElementById('fontSelector').addEventListener('change', function() {
+            document.body.classList.remove('font-small', 'font-medium', 'font-large');
+            document.body.classList.add(this.value);
+            localStorage.setItem('font', this.value); // <-- Save to localStorage
+        });
+</script>
+
+
+</body>
+</html>
+
+    <main>
+        <section class="container">
+          <!-- <div class="box">Left Content</div> --> 
+          <!--  <div class="box">Right Content</div> --> 
+        </section>
+    
+    </main>
+
+    <footer>
+        <p>© 2024 My Website</p>
+    </footer>
+</body>
+</html>

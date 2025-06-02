@@ -8,7 +8,7 @@ body {
 header {
     background-color: #a6cbf0;
     color: white;
-    padding: 20px;
+    padding: 5px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -31,7 +31,7 @@ nav ul {
 
 nav ul li {
     display: inline;
-    margin: 0 15px;
+    margin: 0 10px;
 }
 
 nav ul li a {
@@ -76,13 +76,23 @@ nav ul li a {
 
 .price {
   font-size: 2em;
-  color: #d32f2f;
+  color: #2f9ad3;
 }
 
 .old-price {
   text-decoration: line-through;
   color: #999;
   font-size: 1em;
+}
+
+.book-button {
+background-color: blue;
+color: white;
+padding: 35px 100px;
+border: none;
+border-radius: 10px;
+cursor: pointer;
+margin: 5px;
 }
 
 ul {
@@ -107,8 +117,154 @@ ul li {
 }
 
 .highlight {
-  color: #d32f2f;
+  color: #2f97d3;
   font-weight: bold;
+}
+
+.nav-outline a {
+    border: 2px solid #2f6bd3;
+    border-radius: 6px;
+    padding: 15px 22px;
+    background: #ffffff;
+    color: #2f63d3 !important;
+    font-weight: bold;
+    transition: background 0.2s, color 0.2s;
+}
+
+.nav-outline a:hover {
+    background: #a6cbf0;
+    color: #2f63d3 !important;
+}
+.vehicle-selector {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+.vehicle_option {
+  margin-top: 20px;
+}
+.vehicle {
+  flex: 1;
+  min-width: 100px;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  padding: 15px 10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+  background: white;
+  cursor: pointer;
+}
+
+.vehicle.active {
+  border: 2px solid #a6cbf0;
+}
+
+.service-toggle {
+  margin: 20px 0;
+}
+
+.service-toggle span {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.toggle-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.toggle {
+  flex: 1;
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+  background: white;
+  cursor: pointer;
+}
+
+.toggle.active {
+  border: 2px solid #a6cbf0;
+  color: black;
+}
+
+.pricing-section span {
+  display: block;
+  font-weight: bold;
+  margin: 20px 0 10px;
+}
+
+.cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.card.selected {
+  border: 2px solid blue;
+}
+.card {
+  flex: 1;
+  min-width: 250px;
+  border: 1px solid #eee;
+  border-radius: 15px;
+  padding: 20px;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.card.featured {
+  border: 2px solid #a6cbf0;
+  position: relative;
+}
+
+.card .price {
+  font-size: 28px;
+  color: #a6cbf0;
+  font-weight: bold;
+}
+
+.card .price .old {
+  text-decoration: line-through;
+  color: #999;
+  margin-right: 5px;
+  font-size: 18px;
+}
+
+.card .save {
+  font-size: 14px;
+  color: #a6cbf0;
+  margin-top: -5px;
+}
+
+.card .title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.card hr {
+  margin: 15px 0;
+  border: none;
+  border-top: 1px solid #eee;
+}
+
+.card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.card ul li {
+  padding: 5px 0;
+  font-size: 14px;
+  color: #333;
+}
+.vehicle.active,
+.toggle.active {
+  border: 2px solid #a6cbf0;
 }
 
 /* Responsive Design */
