@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Step 3: Confirm</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <img src="logo.jpeg" width="300" height="200" alt="logo" class="header-logo">
+    <h1>Italian Car Wash</h1>
+    <nav>
+      <ul>
+        <li id="header_button"><a href="index.html">Home</a></li>
+        <li id="header_button"><a href="#">About</a></li>
+        <li id="header_button"><a href="#">Contact</a></li>
+        <li class="nav-outline"><a href="booking.html">Booking</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="step-indicator">
+    <div class="step">1</div>
+    <div class="step">2</div>
+    <div class="step active">3</div>
+  </div>
+
+  <h2>Confirm Your Booking</h2>
+  <div id="summary"></div>
+  <button onclick="submitBooking()">Confirm</button>
+
+  <footer>
+    <p>© 2024 Italian Car Wash</p>
+  </footer>
+
+  <script>
+    // Show summary on load
+    document.addEventListener('DOMContentLoaded', function () {
+      const summary = document.getElementById('summary');
+      const vehicle = localStorage.getItem('booking_vehicle') || '';
+      const service = localStorage.getItem('booking_service') || '';
+      const pack = localStorage.getItem('booking_package') || '';
+      const name = localStorage.getItem('booking_name') || '';
+      const email = localStorage.getItem('booking_email') || '';
+      const phone = localStorage.getItem('booking_phone') || '';
+
+      summary.innerHTML = `
+        <b>Vehicle:</b> ${vehicle}<br>
+        <b>Service:</b> ${service}<br>
+        <b>Package:</b> ${pack}<br>
+        <b>Name:</b> ${name}<br>
+        <b>Email:</b> ${email}<br>
+        <b>Phone:</b> ${phone}<br>
+      `;
+    });
+
+    // Submit booking via PHP
+    function submitBooking() {
+      const data = new FormData();
+      data.append('vehicle', localStorage.getItem('booking_vehicle') || '');
+      data.append('service', localStorage.getItem('booking_service') || '');
+      data.append('package', localStorage.getItem('booking_package') || '');
+      data.append('name', localStorage.getItem('booking_name') || '');
+      data.append('email', localStorage.getItem('booking_email') || '');
+      data.append('phone', localStorage.getItem('booking_phone') || '');
+
+      fetch('submit_booking.php', {
+        method: 'POST',
+        body: data
+      })
+      .then(response => response.json())
+      .then(result => {
+        if (result.success) {
+          alert("✅ Booking saved!");
+          localStorage.clear();
+          window.location.href = 'index.html'; // Or a thank you page
+        } else {
+          alert("❌ " + result.message);
+        }
+      })
+      .catch(error => {
+        console.error('Error!', error);
+        alert("❌ Network or server error.");
+      });
+    }
+  </script>
+</body>
+</html>

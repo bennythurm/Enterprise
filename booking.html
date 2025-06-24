@@ -1,33 +1,56 @@
-
-</head>
-<body>
-
-    <header>
-        <img src="logo.jpeg" width="300" height="200" alt ="logo" class = "header-logo">
-        <h1>Italian Car Wash</h1>
-        <nav>
-            <ul>
-                <li id="header_button"><a href="index.html">Home</a></li>
-                <li id="header_button"><a href="#">About</a></li>
-                <li id="header_button"><a href="#">Contact</a></li>
-                <li class="header_button"><a href="#">Accesibility</a></li>
-                <li class="nav-outline"><a href="booking.html">Booking</a></li>
-            </ul>
-        </nav>
-    </header>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Car Wash Services</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Step 1: Select Service</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
- <div class="vehicle_option"> 
-    <b>Select Your Vehicle: </b>
+<header>
+  <img src="logo.jpeg" width="300" height="200" alt="logo" class="header-logo" />
+  <h1>Italian Car Wash</h1>
+  <nav>
+    <ul>
+      <li id="header_button"><a href="index.html">Home</a></li>
+      <li id="header_button"><a href="#">About</a></li>
+      <li id="header_button"><a href="#">Contact</a></li>
+      <li class="dropdown">
+        <a href="#">Accessibility ▼</a>
+        <div class="dropdown-content">
+          <label for="themeSelector">Color Mode:</label>
+          <select id="themeSelector">
+            <option value="default">Default</option>
+            <option value="deuteranopia">Deuteranopia</option>
+            <option value="protanopia">Protanopia</option>
+            <option value="tritanopia">Tritanopia</option>
+          </select>
+          <label for="fontSelector">Font Size:</label>
+          <select id="fontSelector">
+            <option value="font-small">Small</option>
+            <option value="font-medium" selected>Medium</option>
+            <option value="font-large">Large</option>
+          </select>
+        </div>
+      </li>
+      <li class="nav-outline"><a href="booking.html">Booking</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- Step indicator -->
+<div class="step-indicator">
+  <div class="step current">1</div>
+  <div class="step">2</div>
+  <div class="step">3</div>
 </div>
+
+<div class="content-wrapper">
+  <div class="vehicle_option">
+    <b>Select Your Vehicle: </b>
+  </div>
+
   <!-- Vehicle Type Selector -->
   <div class="vehicle-selector">
     <button class="vehicle active"><br>SEDAN</button>
@@ -49,7 +72,7 @@
     <span>Select:</span>
     <div class="cards">
       <!-- Express Wash -->
-      <div class="card">
+      <div class="card selected">
         <div class="price">$25</div>
         <div class="title">Express Wash</div>
         <hr />
@@ -119,14 +142,23 @@
     </div>
   </div>
 
-  <form id="bookingForm" action="save-booking.php" method="POST">
-  <input type="hidden" id="selectedVehicle" name="vehicle">
-  <input type="hidden" id="selectedService" name="service">
-  <input type="hidden" id="selectedPackage" name="package">
-</form>
+  <!-- Hidden form to keep data, but submission replaced by redirect -->
+  <form id="bookingForm" action="save-booking.php" method="POST" style="display:none;">
+    <input type="hidden" id="selectedVehicle" name="vehicle" />
+    <input type="hidden" id="selectedService" name="service" />
+    <input type="hidden" id="selectedPackage" name="package" />
+  </form>
+
+  <!-- Next button -->
+  <button onclick="saveBookingData()">Next</button>
+</div>
+
+<footer>
+  <p>© 2024 My Website</p>
+</footer>
 
 <script>
-  // Select DOM elements only once
+  // Select DOM elements once
   const vehicleButtons = document.querySelectorAll('.vehicle');
   const serviceButtons = document.querySelectorAll('.toggle');
   const cards = document.querySelectorAll('.card');
@@ -162,53 +194,44 @@
     });
   });
 
-  // On form submit, inject selected values into hidden inputs
-  document.getElementById("bookingForm").addEventListener("submit", function () {
-    document.getElementById("selectedVehicle").value = selectedVehicle;
-    document.getElementById("selectedService").value = selectedService;
-    document.getElementById("selectedPackage").value = selectedPackage;
+  // Save booking data to localStorage and redirect to next page
+  function saveBookingData() {
+    localStorage.setItem('booking_vehicle', selectedVehicle);
+    localStorage.setItem('booking_service', selectedService);
+    localStorage.setItem('booking_package', selectedPackage);
+
+    // Optional: also update hidden inputs if you want to submit via form later
+    document.getElementById('selectedVehicle').value = selectedVehicle;
+    document.getElementById('selectedService').value = selectedService;
+    document.getElementById('selectedPackage').value = selectedPackage;
+
+    window.location.href = "details.html";
+  }
+
+  // Load saved theme and font size from localStorage
+  document.addEventListener('DOMContentLoaded', function () {
+    const savedTheme = localStorage.getItem('theme') || 'default';
+    const savedFont = localStorage.getItem('font') || 'font-medium';
+
+    document.body.classList.add(savedTheme, savedFont);
+    document.getElementById('themeSelector').value = savedTheme;
+    document.getElementById('fontSelector').value = savedFont;
   });
 
-   // SAVING THE OPTION ACROSS PAGES
-        document.addEventListener('DOMContentLoaded', function() {
-            // Load saved theme and font size from localStorage
-            const savedTheme = localStorage.getItem('theme') || 'default';
-            const savedFont = localStorage.getItem('font') || 'font-medium';
-            
-            document.body.classList.add(savedTheme, savedFont);
-            document.getElementById('themeSelector').value = savedTheme;
-            document.getElementById('fontSelector').value = savedFont;
-        });
+  // Color Mode Selector
+  document.getElementById('themeSelector').addEventListener('change', function () {
+    document.body.classList.remove('default', 'deuteranopia', 'protanopia', 'tritanopia');
+    document.body.classList.add(this.value);
+    localStorage.setItem('theme', this.value);
+  });
 
-        // COLOR MODE
-        document.getElementById('themeSelector').addEventListener('change', function() {
-            document.body.classList.remove('default', 'deuteranopia', 'protanopia', 'tritanopia');
-            document.body.classList.add(this.value);
-            localStorage.setItem('theme', this.value); // <-- Save to localStorage
-        });
-    
-        // FONT SIZE
-        document.getElementById('fontSelector').addEventListener('change', function() {
-            document.body.classList.remove('font-small', 'font-medium', 'font-large');
-            document.body.classList.add(this.value);
-            localStorage.setItem('font', this.value); // <-- Save to localStorage
-        });
+  // Font Size Selector
+  document.getElementById('fontSelector').addEventListener('change', function () {
+    document.body.classList.remove('font-small', 'font-medium', 'font-large');
+    document.body.classList.add(this.value);
+    localStorage.setItem('font', this.value);
+  });
 </script>
 
-
-</body>
-</html>
-
-    <main>
-        <section class="container">
-          <!-- <div class="box">Left Content</div> --> 
-          <!--  <div class="box">Right Content</div> --> 
-        </section>
-    
-    </main>
-
-    <footer>
-        <p>© 2024 My Website</p>
-    </footer>
 </body>
 </html>

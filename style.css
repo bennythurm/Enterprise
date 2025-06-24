@@ -354,7 +354,54 @@ ul li {
   width: 100%;
   margin-bottom: 12px;
 }
+.step-indicator {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+.step {
+  width: 40px;
+  height: 40px;
+  background: lightgray;
+  color: black;
+  border-radius: 50%;
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+.step.current {
+  background: #007bff;
+  color: white;
+}
+.step-indicator {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+}
 
+.step {
+  width: 40px;
+  height: 40px;
+  background: #ccc;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  font-weight: bold;
+}
+
+.step.active {
+  background: #28a745;
+  color: #fff;
+}
+
+.content-wrapper {
+    max-width: 1150px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
 /* Responsive Design */
 @media (max-width: 600px) {
     .container {
