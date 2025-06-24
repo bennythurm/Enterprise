@@ -53,9 +53,9 @@
       `;
     });
 
-    // Submit booking via PHP
+    // Submit booking via Google Apps Script web app
     function submitBooking() {
-      const data = new FormData();
+      const data = new URLSearchParams();
       data.append('vehicle', localStorage.getItem('booking_vehicle') || '');
       data.append('service', localStorage.getItem('booking_service') || '');
       data.append('package', localStorage.getItem('booking_package') || '');
@@ -63,16 +63,17 @@
       data.append('email', localStorage.getItem('booking_email') || '');
       data.append('phone', localStorage.getItem('booking_phone') || '');
 
-      fetch('submit_booking.php', {
+      fetch('https://script.google.com/macros/s/AKfycbx7-rW9it0iKxZQpE0RxkEjOYD-637KHLOcSPo0GhWsp2tsQcWNRjA8TcOCR2i-JpySMQ/exec', {  // <--- Replace this with your Apps Script Web App URL
         method: 'POST',
-        body: data
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: data.toString()
       })
       .then(response => response.json())
       .then(result => {
         if (result.success) {
           alert("✅ Booking saved!");
           localStorage.clear();
-          window.location.href = 'index.html'; // Or a thank you page
+          window.location.href = 'index.html'; // or a thank you page
         } else {
           alert("❌ " + result.message);
         }
