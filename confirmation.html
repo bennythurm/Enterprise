@@ -63,7 +63,7 @@
       data.append('email', localStorage.getItem('booking_email') || '');
       data.append('phone', localStorage.getItem('booking_phone') || '');
 
-      fetch('https://script.google.com/macros/s/AKfycbx7-rW9it0iKxZQpE0RxkEjOYD-637KHLOcSPo0GhWsp2tsQcWNRjA8TcOCR2i-JpySMQ/exec', {  // <--- Replace this with your Apps Script Web App URL
+      fetch('https://script.google.com/macros/s/AKfycbyzazin8rHmc4xAICcqPk1n0-DvdQRH0S4H2oti5UlXE54C0669G3_ynN23QAReKW5QnA/exec', {  // <--- Replace this with your Apps Script Web App URL
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: data.toString()
