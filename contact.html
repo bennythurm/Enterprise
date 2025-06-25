@@ -1,23 +1,19 @@
-<!-- details.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Step 2: Customer Details</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Italian Car Wash</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <!-- HEADER -->
   <header>
     <img src="logo.jpeg" width="300" height="200" alt="logo" class="header-logo">
     <h1>Italian Car Wash</h1>
     <nav>
       <ul>
         <li id="header_button"><a href="index.html">Home</a></li>
-        <li id="header_button"><a href="#">About</a></li>
-        <li id="header_button"><a href="#">Contact</a></li>
+        <li id="header_button"><a href="about.html">About</a></li>
+        <li id="header_button"><a href="contact.html">Contact</a></li>
         <li class="dropdown">
           <a href="#">Accessibility ▼</a>
           <div class="dropdown-content">
@@ -41,67 +37,45 @@
     </nav>
   </header>
 
-  <!-- STEP INDICATOR -->
-  <div class="step-indicator">
-    <div class="step">1</div>
-    <div class="step active">2</div>
-    <div class="step">3</div>
+<main>
+  <div class="content-wrapper">
+    <h1>Contact Us</h1>
+    <p style="font-size:1.7em;">Whether you have more questions or need some help booking call us!</p>
+    <br>
+    <h1>Our Location</h1>
+    <div style="display: flex; align-items: flex-start; gap: 32px;">
+      <div style="flex:1;">
+        <b style="font-size: 2.5em; margin-top: 120px; display: inline-block;">
+        123 Powerwash Street<br>Roma, Italy</b>
+      </div>
+      <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2645.1793893314407!2d12.498485834141357!3d41.97393312336842!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f6196f9928ebb%3A0xb90f770693656e38!2sRome%2C%20Metropolitan%20City%20of%20Rome%20Capital%2C%20Italy!5e0!3m2!1sen!2sus!4v1750822815449!5m2!1sen!2sus"
+        width="570" 
+        height="450" 
+        style="border:0; border-radius:8px;"
+        allowfullscreen="" 
+        loading="lazy">
+      </iframe>
+    </div>
+    <br>
+    <h1>Contact Information</h1>
+    <div style="display: flex; align-items: flex-start; gap: 32px;">
+      <div style="flex:1;">
+        <p style="font-size: 1.7em;">You can reach us by phone or email:</p>
+        <p><strong>Phone:</strong> +123456789</p>
+        <p><strong>Email:</strong> carwash@italian.com</p>
   </div>
+</main>
 
-  <!-- MAIN CONTENT -->
-  <main>
-    <section class="title">
-      <h2>Enter Your Booking Details</h2>
-      <p>Please fill out your contact information below.</p>
-    </section>
-
-<section class="form-section">
-  <form onsubmit="saveDetails(event)" class="booking-form">
-    <div class="form-group">
-      <label for="name">Name:</label>
-      <input type="text" id="name" required>
-    </div>
-
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" id="email" required>
-    </div>
-
-    <div class="form-group">
-      <label for="phone">Phone:</label>
-      <input type="tel" id="phone" required>
-    </div>
-
-    <div class="form-group">
-      <button type="submit">Next</button>
-    </div>
-  </form>
-</section>
-
-    </section>
-  </main>
-
-  <!-- FOOTER -->
   <footer>
     <p>© 2024 Italian Car Wash</p>
   </footer>
 
-  <!-- SCRIPT -->
   <script>
-    // Save customer details
-    function saveDetails(e) {
-      e.preventDefault();
-      localStorage.setItem('booking_name', document.getElementById('name').value);
-      localStorage.setItem('booking_email', document.getElementById('email').value);
-      localStorage.setItem('booking_phone', document.getElementById('phone').value);
-      window.location.href = "confirmation.html";
-    }
-
-    // Apply saved accessibility settings
+    // Apply saved theme + font
     document.addEventListener('DOMContentLoaded', function () {
       const savedTheme = localStorage.getItem('theme') || 'default';
       const savedFont = localStorage.getItem('font') || 'font-medium';
-
       document.body.classList.add(savedTheme, savedFont);
       document.getElementById('themeSelector').value = savedTheme;
       document.getElementById('fontSelector').value = savedFont;
@@ -119,6 +93,5 @@
       });
     });
   </script>
-
 </body>
 </html>

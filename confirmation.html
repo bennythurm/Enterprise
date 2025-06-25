@@ -1,40 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Step 3: Confirm</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <img src="logo.jpeg" width="300" height="200" alt="logo" class="header-logo">
+    <img src="logo.jpeg" width="300" height="200" alt="logo" class="header-logo" />
     <h1>Italian Car Wash</h1>
     <nav>
       <ul>
         <li id="header_button"><a href="index.html">Home</a></li>
-        <li id="header_button"><a href="#">About</a></li>
-        <li id="header_button"><a href="#">Contact</a></li>
+        <li id="header_button"><a href="about.html">About</a></li>
+        <li id="header_button"><a href="contact.html">Contact</a></li>
+        <li class="dropdown">
+          <a href="#" aria-haspopup="true" aria-expanded="false">Accessibility ▼</a>
+          <div class="dropdown-content" role="menu" aria-label="Accessibility options">
+            <label for="themeSelector">Color Mode:</label>
+            <select id="themeSelector" aria-controls="page">
+              <option value="default">Default</option>
+              <option value="deuteranopia">Deuteranopia</option>
+              <option value="protanopia">Protanopia</option>
+              <option value="tritanopia">Tritanopia</option>
+            </select>
+            <label for="fontSelector">Font Size:</label>
+            <select id="fontSelector" aria-controls="page">
+              <option value="font-small">Small</option>
+              <option value="font-medium" selected>Medium</option>
+              <option value="font-large">Large</option>
+            </select>
+          </div>
+        </li>
         <li class="nav-outline"><a href="booking.html">Booking</a></li>
       </ul>
     </nav>
   </header>
 
-  <div class="step-indicator">
-    <div class="step">1</div>
-    <div class="step">2</div>
-    <div class="step active">3</div>
-  </div>
+  <main id="page" tabindex="-1">
+    <div class="confirmation-container">
+      <div class="confirmation-step-indicator" role="list" aria-label="Booking progress">
+        <div class="confirmation-step" role="listitem">1</div>
+        <div class="confirmation-step" role="listitem">2</div>
+        <div class="confirmation-step active" role="listitem" aria-current="step">3</div>
+      </div>
 
-  <h2>Confirm Your Booking</h2>
-  <div id="summary"></div>
-  <button onclick="submitBooking()">Confirm</button>
+      <h2>Confirm Your Booking</h2>
+      <div id="summary" aria-live="polite"></div>
+      <button onclick="submitBooking()" aria-label="Confirm your booking">Confirm</button>
+    </div>
+  </main>
 
   <footer>
     <p>© 2024 Italian Car Wash</p>
   </footer>
 
   <script>
-    // Show summary on load
+    // Accessibility: update aria-expanded for dropdown on click (optional)
+    document.querySelector('.dropdown > a').addEventListener('click', function(e) {
+      e.preventDefault();
+      const expanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', !expanded);
+      this.nextElementSibling.style.display = expanded ? 'none' : 'block';
+    });
+
     document.addEventListener('DOMContentLoaded', function () {
+      // Load booking info
       const summary = document.getElementById('summary');
       const vehicle = localStorage.getItem('booking_vehicle') || '';
       const service = localStorage.getItem('booking_service') || '';
@@ -51,9 +83,33 @@
         <b>Email:</b> ${email}<br>
         <b>Phone:</b> ${phone}<br>
       `;
+
+      // Load saved theme and font size from localStorage for accessibility
+      const savedTheme = localStorage.getItem('theme') || 'default';
+      const savedFont = localStorage.getItem('font') || 'font-medium';
+
+      document.body.classList.add(savedTheme, savedFont);
+      const themeSelector = document.getElementById('themeSelector');
+      const fontSelector = document.getElementById('fontSelector');
+
+      if (themeSelector && fontSelector) {
+        themeSelector.value = savedTheme;
+        fontSelector.value = savedFont;
+
+        themeSelector.addEventListener('change', function() {
+          document.body.classList.remove('default', 'deuteranopia', 'protanopia', 'tritanopia');
+          document.body.classList.add(this.value);
+          localStorage.setItem('theme', this.value);
+        });
+
+        fontSelector.addEventListener('change', function() {
+          document.body.classList.remove('font-small', 'font-medium', 'font-large');
+          document.body.classList.add(this.value);
+          localStorage.setItem('font', this.value);
+        });
+      }
     });
 
-    // Submit booking via Google Apps Script web app
     function submitBooking() {
       const data = new URLSearchParams();
       data.append('vehicle', localStorage.getItem('booking_vehicle') || '');
@@ -63,7 +119,7 @@
       data.append('email', localStorage.getItem('booking_email') || '');
       data.append('phone', localStorage.getItem('booking_phone') || '');
 
-      fetch('https://script.google.com/macros/s/AKfycbyzazin8rHmc4xAICcqPk1n0-DvdQRH0S4H2oti5UlXE54C0669G3_ynN23QAReKW5QnA/exec', {  // <--- Replace this with your Apps Script Web App URL
+      fetch('https://script.google.com/macros/s/AKfycbyzazin8rHmc4xAICcqPk1n0-DvdQRH0S4H2oti5UlXE54C0669G3_ynN23QAReKW5QnA/exec', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: data.toString()
@@ -73,7 +129,7 @@
         if (result.success) {
           alert("✅ Booking saved!");
           localStorage.clear();
-          window.location.href = 'index.html'; // or a thank you page
+          window.location.href = 'index.html';
         } else {
           alert("❌ " + result.message);
         }

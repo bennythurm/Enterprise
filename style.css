@@ -402,6 +402,190 @@ ul li {
     margin: 0 auto;
     box-sizing: border-box;
 }
+.booking-form {
+  max-width: 500px;
+  margin: 2em auto;
+  padding: 2em;
+  background: #f7f0f0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: left;  /* Ensure labels align to the left inside form */
+}
+
+.booking-form label {
+  display: block;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+.booking-form input {
+  display: block;
+  width: 100%;
+  padding: 0.9em 1em;
+  font-size: 1.1em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 1.5em;
+  box-sizing: border-box;
+}
+
+.booking-form button {
+  display: block;
+  width: 100%;
+  padding: 1em;
+  font-size: 1.2em;
+  background: #3366cc;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 1em;
+}
+
+.booking-form button:hover {
+  background: #254b9b;
+}
+
+.confirmation-container {
+  /* fallback background & color */
+  background: #f4f4f4;
+  color: black;
+}
+
+body.default .confirmation-container {
+  background: white;
+  color: black;
+}
+
+body.deuteranopia .confirmation-container {
+  background: #f5f5dc;
+  color: black;
+}
+
+body.protanopia .confirmation-container {
+  background: #fdf6e3;
+  color: #111;
+}
+
+body.tritanopia .confirmation-container {
+  background: #f0f0f0;
+  color: #111;
+}
+
+
+.confirmation-container h2 {
+  font-size: 2em;
+  margin-top: 20px;
+  color: #2f63d3;
+}
+
+.confirmation-container #summary {
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 2em;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.confirmation-container #summary b {
+  color: #333;
+}
+
+.confirmation-container button {
+  padding: 1em 3em;
+  font-size: 1.2em;
+  background: #2f63d3;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 20px 0;
+  transition: background 0.3s ease;
+}
+
+.confirmation-container button:hover {
+  background: #254b9b;
+}
+
+.confirmation-step-indicator {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.confirmation-step {
+  width: 40px;
+  height: 40px;
+  background: #ccc;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  font-weight: bold;
+}
+
+.confirmation-step.active {
+  background: #28a745;
+  color: #fff;
+}
+
+.confirmation-container header {
+  background: #a6cbf0;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.confirmation-container header img {
+  height: 80px;
+  margin-right: 20px;
+}
+
+.confirmation-container header h1 {
+  font-size: 1.8em;
+  color: white;
+  margin: 0;
+}
+
+.confirmation-container nav ul {
+  list-style: none;
+  margin-left: auto;
+  margin-right: 20px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.confirmation-container nav ul li {
+  margin: 0 10px;
+}
+
+.confirmation-container nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.confirmation-container .nav-outline a {
+  border: 2px solid #2f6bd3;
+  border-radius: 6px;
+  padding: 8px 14px;
+  background: #ffffff;
+  color: #2f63d3 !important;
+}
+
+.confirmation-container footer {
+  background: #333;
+  color: #fff;
+  padding: 10px;
+  margin-top: 30px;
+}
+
+
 /* Responsive Design */
 @media (max-width: 600px) {
     .container {

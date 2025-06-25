@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Italian Car Wash</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <img src="logo.jpeg" width="300" height="200" alt="logo" class="header-logo">
+    <h1>Italian Car Wash</h1>
+    <nav>
+      <ul>
+        <li id="header_button"><a href="index.html">Home</a></li>
+        <li id="header_button"><a href="about.html">About</a></li>
+        <li id="header_button"><a href="contact.html">Contact</a></li>
+        <li class="dropdown">
+          <a href="#">Accessibility ▼</a>
+          <div class="dropdown-content">
+            <label for="themeSelector">Color Mode:</label>
+            <select id="themeSelector">
+              <option value="default">Default</option>
+              <option value="deuteranopia">Deuteranopia</option>
+              <option value="protanopia">Protanopia</option>
+              <option value="tritanopia">Tritanopia</option>
+            </select>
+            <label for="fontSelector">Font Size:</label>
+            <select id="fontSelector">
+              <option value="font-small">Small</option>
+              <option value="font-medium" selected>Medium</option>
+              <option value="font-large">Large</option>
+            </select>
+          </div>
+        </li>
+        <li class="nav-outline"><a href="booking.html">Booking</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="content-wrapper">
+    <h1>Welcome to Italian Car Wash</h1>
+
+    <br>
+
+    <h1>About Us</h1>
+    <p>At Italian Car Wash, we pride ourselves on providing top-notch car cleaning services with a touch of Italian flair. Our team is dedicated to ensuring your vehicle looks its best, using only the finest products and techniques.</p>
+    <p>Founded in 2017 we here at Italian Car Wash strive to provide the best service possible for you.</p>
+    
+    <div style="display: flex; align-items: flex-start; gap: 24px;">
+      <img src="https://c8.alamy.com/comp/2G2AF9K/old-rusty-neon-sign-for-a-generic-car-wash-taken-along-old-route-66-in-new-mexico-2G2AF9K.jpg"
+           alt="Car Wash Sign"
+           class="about-image"
+           style="width: 570px; border-radius: 8px; margin-right: 16px; margin-left: 8px; flex-shrink: 0;">
+      <div>
+        <b style="font-size: 5em; margin-top: 40px; display: inline-block;">Where are we located</b>
+        <p style="font-size: 1.2em; margin-top: 20px;">We are located in Roma, Italy, and we welcome customers from all over the region. Our facility is designed to provide a comfortable and efficient car washing experience.</p>
+      </div>
+    </div>
+
+    <div style="display: flex; align-items: flex-start; gap: 24px; margin-top: 32px;">
+      <div style="flex:1;">
+        <b style="font-size: 5em; margin-top: 10px; display: inline-block;">Opening Times</b>
+        <p style="font-size: 1.2em; margin-top: 20px;">We are open every day from 8:00 AM to 8:00 PM, ensuring you can get your car washed at your convenience.</p>
+      </div>
+      <img src="https://www.andysautowash.com/user/blogs/42835/img-f.jpg?t=1732136942"
+           alt="Car Wash Facility"
+           style="width: 570px; border-radius: 8px;">
+    </div>
+    <br>
+    <div>
+      <b style="font-size: 5em;"> Why Choose Us</b>
+      <p style="font-size:1.2em;">Our team of staff is very dedicated to our mission</p>
+      <p style="font-size:1.2em;">We use only the best products to ensure your car is cleaned to the highest standard</p>
+      <p style="font-size:1.2em;">We have a wide range of services to suit all your car cleaning needs</p>
+      <p style="font-size:1.2em;">We are committed to providing excellent customer service and satisfaction</p>
+    </div>
+  </div>
+</main>
+  
+  <footer>
+    <p>© 2024 Italian Car Wash</p>
+  </footer>
+
+  <script>
+    // Apply saved theme + font
+    document.addEventListener('DOMContentLoaded', function () {
+      const savedTheme = localStorage.getItem('theme') || 'default';
+      const savedFont = localStorage.getItem('font') || 'font-medium';
+      document.body.classList.add(savedTheme, savedFont);
+      document.getElementById('themeSelector').value = savedTheme;
+      document.getElementById('fontSelector').value = savedFont;
+
+      document.getElementById('themeSelector').addEventListener('change', function () {
+        document.body.classList.remove('default', 'deuteranopia', 'protanopia', 'tritanopia');
+        document.body.classList.add(this.value);
+        localStorage.setItem('theme', this.value);
+      });
+
+      document.getElementById('fontSelector').addEventListener('change', function () {
+        document.body.classList.remove('font-small', 'font-medium', 'font-large');
+        document.body.classList.add(this.value);
+        localStorage.setItem('font', this.value);
+      });
+    });
+  </script>
+</body>
+</html>
