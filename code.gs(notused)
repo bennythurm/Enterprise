@@ -1,0 +1,70 @@
+function doPost(e) {
+  try {
+    const params = e.parameter;
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Bookings') 
+               || SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+
+    sheet.appendRow([
+      new Date(),
+      params.vehicle || '',
+      params.service || '',
+      params.package || '',
+      params.name || '',
+      params.email || '',
+      params.phone || ''
+    ]);
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ success: true }))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch (error) {
+    return ContentService
+      .createTextOutput(JSON.stringify({
+        success: false,
+        message: error.message
+      }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function doGet(e) {
+  if (e.parameter.staff === 'true') {
+    try {
+      const data = getBookingData();
+      return ContentService
+        .createTextOutput(JSON.stringify(data))
+        .setMimeType(ContentService.MimeType.JSON);
+    } catch (error) {
+      return ContentService
+        .createTextOutput(JSON.stringify({
+          success: false,
+          message: error.message
+        }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+  } else {
+    return HtmlService.createHtmlOutputFromFile('staff');
+  }
+}
+
+function getBookingData() {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Bookings') 
+             || SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  const data = sheet.getDataRange().getValues();
+
+  if (data.length < 2) {
+    return [];
+  }
+
+  const headers = data[0];
+  const rows = data.slice(1);
+
+  return rows.map(row => {
+    const obj = {};
+    headers.forEach((h, i) => {
+      obj[h] = row[i];
+    });
+    return obj;
+  });
+}
